@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 import os
 
 # Ensure the DATABASE_URL is correctly set or fallback to a default value
-DATABASE_URL = os.getenv("DATABASE_URL", "mysql+pymysql://pieraly:pieraly@localhost:3306/items_db")
+DATABASE_URL = os.getenv("DATABASE_URL", "mysql+pymysql://pieraly:pieraly@localhost:8888/items_db")
 
 # Create the SQLAlchemy engine
 engine = create_engine(DATABASE_URL)

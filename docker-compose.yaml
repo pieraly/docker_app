@@ -11,7 +11,7 @@ services:
       - db
 
   db:
-    image: mysql
+    image: mysql:latest
     container_name: db
     environment:
       MYSQL_ROOT_PASSWORD: pieraly
@@ -21,3 +21,13 @@ services:
     ports:
       - "6033:3306"
 
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: host.docker.internal
+      MYSQL_ROOT_PASSWORD: pieraly
+    ports:
+      - "8889:80"
+    depends_on:
+      - db
