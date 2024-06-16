@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 import models
 import schemas
@@ -15,7 +15,7 @@ def get_db():
     finally:
         db.close()
 
-@app.post("/items/", response_model=schemas.Item)
+@app.post("/items/", response_model=schemas.Item, status_code=status.HTTP_201_CREATED)
 def create_item(item: schemas.ItemCreate, db: Session = Depends(get_db)):
     db_item = models.Item(**item.dict())
     db.add(db_item)
@@ -34,3 +34,13 @@ def read_item(item_id: int, db: Session = Depends(get_db)):
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")
     return item
+
+@app.delete("/items/{item_id}")
+def delete_item(item_id: int, db: Session = Depends(get_db)):
+    db_item = db.query(models.Item).filter(models.Item.id == item_id).first()
+    if db_item:
+        db.delete(db_item)
+        db.commit()
+        return {"message": f"Item with ID {item_id} deleted successfully"}
+    else:
+        raise HTTPException(status_code=404, detail=f"Item with ID {item_id} not found")
