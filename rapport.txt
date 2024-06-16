@@ -1,0 +1,16 @@
+# creation du docker file et build sans aucun problème 
+
+# creation du docker-compose avec qlq problème comme :
+
+# ajout de cryptography dans les requirements  
+# pb au niveau de la config de la db
+# changer plusieurs de fois de port
+# creer un nouvel utilisateur
+# problème avec host.docker.internal avec le port 8889
+
+# commandes utliser 
+# uvicorn main:app pour tester si l'application marche en local sans mettre d'abord docker
+# pip install -r requirements.txt pour creer les dependancies
+# docker build -t fastapi-app .  pour build docker file
+# docker-compose up --build pour build le compose.yaml
+# docker-compose down pour supprimer les contenneurs si ya eu des problème

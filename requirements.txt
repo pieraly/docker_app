@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+sqlalchemy
+pymysql
+pydantic
+cryptography # j'ai du l'installer car j'avais de pb pour le password
+python-dotenv
